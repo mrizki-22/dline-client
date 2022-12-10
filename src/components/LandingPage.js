@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import Navbar from "./Navbar.js";
+import Footer from "./Footer.js";
 import ilustrasi from "../assets/image/ilustrasi.png";
 import logo from "../assets/image/logo.webp";
 import { Link } from "react-router-dom";
@@ -75,6 +76,7 @@ function LandingPage() {
   const [ref, inView] = useInView({
     threshold: 0.5,
     triggerOnce: true,
+    rootMargin: "-80px",
   });
   const [ref2, inView2] = useInView({
     threshold: 0.5,
@@ -84,7 +86,7 @@ function LandingPage() {
     document.title = "Dline - Jasa Design Grafis";
   }, []);
   return (
-    <div className="font-poppins">
+    <div className="font-poppins  overflow-x-hidden">
       <Navbar />
       {/* Jumbotron */}
       <div className="flex justify-center py-24 px-8 md:px-44 ">
@@ -105,7 +107,7 @@ function LandingPage() {
       </div>
 
       {/* {services section} */}
-      <div className="flex flex-col py-24 px-4   bg-[#f9eaea] place-items-center space-y-14 " ref={ref}>
+      <div className="flex flex-col py-24 px-4   bg-[#f9eaea] place-items-center space-y-14 overflow-y-hidden" ref={ref}>
         <div className="font-semibold text-center">
           <p className="text-sm text-candy-apple-red">Services</p>
           <p className="text-[28px] text-space-cadet">Layanan Kami</p>
@@ -153,7 +155,7 @@ function LandingPage() {
           <p className="text-sm text-candy-apple-red">Portfolio</p>
           <p className="text-[28px] text-space-cadet">Portfolio Kami</p>
         </div>
-        <div className="mx-auto" ref={ref2}>
+        <div className="mx-auto overflow-y-hidden" ref={ref2}>
           <div className={inView2 ? "animate-slide-top" : "hidden"}>
             <PortfolioCarousel />
           </div>
@@ -162,6 +164,7 @@ function LandingPage() {
           <PrimaryButton link="/portfolio" text="Lihat Portfolio Lainnya" />
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
