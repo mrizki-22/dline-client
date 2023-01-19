@@ -40,7 +40,7 @@ function Footer() {
             <div className="flex space-x-1">
               <img src={require("../assets/image/gmail-icon.png")} alt="Gmail" width={30} />
               <p className="hover:text-white text-sm mt-1">
-                <a href="mailto:customerservice@dline.com">customerservice@dline.com</a>
+                <a href="mailto:design.and.deadline@gmail.com">design.and.deadline@gmail.com</a>
               </p>
             </div>
             <div className="flex space-x-1">

@@ -6,8 +6,9 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import PendingOrderTable from "./PendingOrderTable";
+import WaitingOrderTable from "./WaitingOrderTable";
 import ProgressOrderTable from "./OnProgressTable";
+import CompleteOrderTable from "./CompleteOrderTable";
 
 function Order() {
   const navigate = useNavigate();
@@ -29,18 +30,20 @@ function Order() {
           <TabContext value={value}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
               <TabList onChange={handleChange} sx={{ width: "100%" }}>
-                <Tab label="Pending Order" value="pending" sx={{ width: "33.3%" }} to="/order" />
+                <Tab label="Waiting Order" value="waiting" sx={{ width: "33.3%" }} to="/order" />
                 <Tab label="On Progress" value="progress" sx={{ width: "33.3%" }} />
-                <Tab label="Semua Order" value="all" sx={{ width: "33.3%" }} />
+                <Tab label="Complete Order" value="complete" sx={{ width: "33.3%" }} />
               </TabList>
             </Box>
-            <TabPanel value="pending">
-              <PendingOrderTable />
+            <TabPanel value="waiting">
+              <WaitingOrderTable />
             </TabPanel>
             <TabPanel value="progress">
               <ProgressOrderTable />
             </TabPanel>
-            <TabPanel value="all">Item Three</TabPanel>
+            <TabPanel value="complete">
+              <CompleteOrderTable />
+            </TabPanel>
           </TabContext>
         </Box>
       </div>

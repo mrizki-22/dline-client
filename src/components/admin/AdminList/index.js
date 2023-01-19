@@ -14,7 +14,7 @@ function AdminList(props) {
 
   async function fetchData() {
     try {
-      const result = await axios.get("http://localhost:5000/admins", {
+      const result = await axios.get(`${process.env.REACT_APP_SERVER_URL}/admins`, {
         headers: {
           Authorization: localStorage.getItem("token"),
         },

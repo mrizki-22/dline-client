@@ -82,7 +82,7 @@ function ModalAddService(props) {
 
   const fetchAddService = async (serviceData) => {
     try {
-      const res = await axios.post("http://localhost:5000/services/add", serviceData, {
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/services/add`, serviceData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `${localStorage.getItem("token")}`,

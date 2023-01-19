@@ -26,7 +26,7 @@ function Layanan() {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/services/list", {
+      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/services/list`, {
         headers: {
           Authorization: `${localStorage.getItem("token")}`,
         },
@@ -90,11 +90,11 @@ function Layanan() {
                 <TableCell align="center" sx={{ fontWeight: "bold", color: "white" }}>
                   Status
                 </TableCell>
-                {isMainAdmin && (
+                {/* {isMainAdmin && (
                   <TableCell align="center" sx={{ fontWeight: "bold", color: "white" }}>
                     Action
                   </TableCell>
-                )}
+                )} */}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -106,7 +106,7 @@ function Layanan() {
                     <TableCell align="center">
                       <div className={`w-2 h-2 rounded-[20px] mx-auto ${service.isActive ? "bg-green-500" : "bg-red-500"}`}></div>
                     </TableCell>
-                    {isMainAdmin && (
+                    {/* {isMainAdmin && (
                       <TableCell align="center">
                         <Tooltip title={`Update ${service.name}`} placement="top">
                           <div className="bg-[#193254] w-5 rounded-md mx-auto cursor-pointer" onClick={() => handleUpdateModalOpen(service.id)}>
@@ -114,7 +114,7 @@ function Layanan() {
                           </div>
                         </Tooltip>
                       </TableCell>
-                    )}
+                    )} */}
                   </TableRow>
                 );
               })}
@@ -122,7 +122,6 @@ function Layanan() {
           </Table>
         </TableContainer>
       </div>
-      <ToastContainer position="top-center" autoClose={2500} hideProgressBar newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" />
     </div>
   );
 }

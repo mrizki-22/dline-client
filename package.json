@@ -14,11 +14,14 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.0",
+    "date-and-time": "^2.4.1",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
+    "react-countdown": "^2.3.5",
     "react-dom": "^18.2.0",
     "react-fast-marquee": "^1.3.5",
+    "react-hook-form": "^7.40.0",
     "react-intersection-observer": "^9.4.1",
     "react-loader-spinner": "^5.3.4",
     "react-material-ui-carousel": "^3.4.2",
@@ -26,6 +29,7 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.1",
     "socket.io-client": "^4.5.4",
+    "tailwind-scrollbar": "^2.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

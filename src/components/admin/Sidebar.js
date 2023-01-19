@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/image/logo.webp";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import TableViewIcon from "@mui/icons-material/TableView";
-import CategoryIcon from "@mui/icons-material/Category";
+import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
@@ -15,8 +15,8 @@ function Sidebar() {
   const [toogle, setToogle] = useState(false);
   const menu = [
     { name: "Dashboard", link: "/admin/dashboard", icon: <DashboardIcon style={{ color: "white" }} /> },
-    { name: "Layanan", link: "/admin/services", icon: <CategoryIcon style={{ color: "white" }} /> },
-    { name: "Order", link: "/admin/order?tab=pending", icon: <TableViewIcon style={{ color: "white" }} /> },
+    { name: "Layanan", link: "/admin/services", icon: <DesignServicesIcon style={{ color: "white" }} /> },
+    { name: "Order", link: "/admin/order?tab=waiting", icon: <TableViewIcon style={{ color: "white" }} /> },
     { name: "List Admin", link: "/admin/admin-list", icon: <SupervisorAccountIcon style={{ color: "white" }} /> },
   ];
   const handleLogout = () => {

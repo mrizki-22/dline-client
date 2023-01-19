@@ -9,11 +9,9 @@ import Paper from "@mui/material/Paper";
 import Tooltip from "@mui/material/Tooltip";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import axios from "axios";
-import Countdown from "react-countdown";
-import date from "date-and-time";
-import ModalProgress from "./ModalProgress";
+import ModalDetail from "./ModalDetail";
 
-function ProgressOrderTable() {
+function WaitingOrderTable() {
   const [data, setData] = useState(null);
   const [selectedOrder, setSelectedOrder] = useState();
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +27,7 @@ function ProgressOrderTable() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/orders/onprogress`)
+      .get(`${process.env.REACT_APP_SERVER_URL}/orders/waiting`)
       .then((res) => {
         setData(res.data);
       })
@@ -40,9 +38,9 @@ function ProgressOrderTable() {
 
   return (
     <div>
-      {isOpen && <ModalProgress open={isOpen} onClose={handleClose} orderId={selectedOrder} />}
+      {isOpen && <ModalDetail open={isOpen} onClose={handleClose} orderId={selectedOrder} />}
       <div>
-        Total : <b>{data ? data.total : "0"}</b>
+        Total : <b>{data ? data.total : 0}</b>
       </div>
       <div className="mt-5">
         <TableContainer component={Paper} sx={{ backgroundColor: "white", height: "100%" }}>
@@ -53,14 +51,12 @@ function ProgressOrderTable() {
                 <TableCell align="left" sx={{ fontWeight: "bold", color: "white", width: 150 }}>
                   A/N
                 </TableCell>
+
                 <TableCell align="left" sx={{ fontWeight: "bold", color: "white", width: 100 }}>
                   Harga
                 </TableCell>
                 <TableCell align="left" sx={{ fontWeight: "bold", color: "white", width: 200 }}>
-                  Waktu Deadline
-                </TableCell>
-                <TableCell align="left" sx={{ fontWeight: "bold", color: "white", width: 200 }}>
-                  Dikerjakan oleh
+                  Waktu Order
                 </TableCell>
                 <TableCell align="center" sx={{ fontWeight: "bold", color: "white", width: 100 }}>
                   Action
@@ -69,20 +65,16 @@ function ProgressOrderTable() {
             </TableHead>
             <TableBody>
               {data &&
-                data.orders.map((row, index) => (
-                  <TableRow key={index} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                data.orders.map((row) => (
+                  <TableRow key={row.name} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                     <TableCell component="th" scope="row">
                       <b>[{row.variantName}]</b> {row.serviceName} (Deadline: {row.variantDeadline} jam)
                     </TableCell>
                     <TableCell align="left">{row.customerName}</TableCell>
+
                     <TableCell align="left">{row.price}</TableCell>
-                    <TableCell align="left">
-                      <Countdown date={date.parse(row.deadlineTime, "DD/MM/YYYY HH:mm")}>
-                        <p className="bg-red-500 p-2 rounded-md text-white inline">Deadline Habis</p>
-                      </Countdown>
-                    </TableCell>
-                    <TableCell align="left">{row.adminName}</TableCell>
-                    <TableCell align="center" className="flex space-x-2">
+                    <TableCell align="left">{row.orderTime}</TableCell>
+                    <TableCell align="center">
                       <div className="cursor-pointer" onClick={() => handleOpen(row.orderId)}>
                         <Tooltip title="Lihat Detail" placement="top">
                           <RemoveRedEyeIcon />
@@ -99,4 +91,4 @@ function ProgressOrderTable() {
   );
 }
 
-export default ProgressOrderTable;
+export default WaitingOrderTable;

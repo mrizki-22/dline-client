@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import TableViewIcon from "@mui/icons-material/TableView";
 import PendingActionsIcon from "@mui/icons-material/PendingActions";
+import CachedIcon from "@mui/icons-material/Cached";
+import DesignServicesIcon from "@mui/icons-material/DesignServices";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import jwt_decode from "jwt-decode";
+import axios from "axios";
 
 function MiniBox(props) {
   return (
@@ -30,11 +34,58 @@ MiniBox.defaultProps = {
 };
 
 function Dashboard() {
+  const [waitingTotal, setWaitingTotal] = useState();
+  const [progressTotal, setProgressTotal] = useState();
+  const [serviceTotal, setServiceTotal] = useState();
+  const [adminTotal, setAdminTotal] = useState();
+
+  useEffect(() => {
+    //get services total
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/services/list`)
+      .then((res) => {
+        setServiceTotal(res.data.length);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    //get order waiting
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/orders/waiting`)
+      .then((res) => {
+        setWaitingTotal(res.data.total);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    //get order progress
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/orders/onprogress`)
+      .then((res) => {
+        setProgressTotal(res.data.total);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    //get admin total
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/admins/list`)
+      .then((res) => {
+        setAdminTotal(res.data.length);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   const boxes = [
-    { box: <MiniBox title="Order Pending" value={10} iconBoxColor="#193254" icon={<PendingActionsIcon sx={{ color: "white" }} />} link="/admin/order?tab=pending" /> },
-    { box: <MiniBox title="Order on Progress" value={10} iconBoxColor="#193254" icon={<PendingActionsIcon sx={{ color: "white" }} />} link="/admin/order?tab=progress" /> },
-    { box: <MiniBox title="Layanan Aktif" value={10} iconBoxColor="#193254" icon={<PendingActionsIcon sx={{ color: "white" }} />} link="/admin/saldo" /> },
-    { box: <MiniBox title="Admin Online" value={10} iconBoxColor="#193254" icon={<PendingActionsIcon sx={{ color: "white" }} />} link="/admin/admin-list" /> },
+    { box: <MiniBox title="Menunggu Konfirmasi" value={waitingTotal} iconBoxColor="#193254" icon={<PendingActionsIcon sx={{ color: "white" }} />} link="/admin/order?tab=waiting" /> },
+    { box: <MiniBox title="Dalam proses" value={progressTotal} iconBoxColor="#193254" icon={<CachedIcon sx={{ color: "white" }} />} link="/admin/order?tab=progress" /> },
+    { box: <MiniBox title="Total Layanan" value={serviceTotal} iconBoxColor="#193254" icon={<DesignServicesIcon sx={{ color: "white" }} />} link="/admin/services" /> },
+    { box: <MiniBox title="Total Admin" value={adminTotal} iconBoxColor="#193254" icon={<SupervisorAccountIcon sx={{ color: "white" }} />} link="/admin/admin-list" /> },
   ];
 
   const greetings = (name) => {

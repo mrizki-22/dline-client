@@ -14,7 +14,6 @@ export default function Navbar() {
     { name: "Home", link: "/home" },
     { name: "Layanan", link: "/services" },
     { name: "Portfolio", link: "/portfolio" },
-    { name: "Kontak", link: "/contact" },
     { name: "Tentang Kami", link: "/about" },
   ];
 

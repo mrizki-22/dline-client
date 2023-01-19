@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-
+const scrollbarPlugin = require("tailwind-scrollbar");
 const plugin = require("tailwindcss/plugin");
 const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
@@ -25,6 +25,7 @@ module.exports = {
     },
   },
   plugins: [
+    scrollbarPlugin({ nocompatible: true }),
     plugin(function ({ addUtilities }) {
       addUtilities({
         ".content-auto": {
@@ -46,4 +47,7 @@ module.exports = {
       });
     }),
   ],
+  variants: {
+    scrollbar: ["rounded"],
+  },
 };

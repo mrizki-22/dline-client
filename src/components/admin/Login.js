@@ -35,7 +35,6 @@ function Login() {
           Login
         </Button>
       </form>
-      <ToastContainer position="top-center" autoClose={2500} hideProgressBar newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" />
     </div>
   );
 }
